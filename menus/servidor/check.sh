@@ -1,24 +1,26 @@
 #!/usr/bin/env bash
+globais
+
 read -r -d '' ENV_VAR_MENU << EOM
   Menu ${BLUE}Servidor - ${BOLD}${RED}Check${NORMAL}
 EOM
  createMenu "menuCheck" "$ENV_VAR_MENU"
  printMenuStrs "menuCheck"
- addMenuItem "menuCheck" "check1" check1
+ addMenuItem "menuCheck" "Porta1" check1
+addMenuItem "menuCheck" "Porta2" check2
  addMenuItem "menuCheck" "Go back" loadMenu "menuServidor"
 #loadMenu "menuConfig"
 #pause
 check1(){
-read -r -d '' ENV_CONFIG << EOM
- Menu ${BLUE}Servidor - ${BOLD}${RED}Check1${NORMAL}
-EOM
+banner "Menu" "Servidor" "Check1"
+	
 
-createMenu "menuCheck2" "$ENV_CONFIG"
-printMenuStrs "menuCheck2"
-source menus/scripts/porta.sh
-addMenuItem "menuCheck2" "Go back" 'loadMenu "menuCheck"'
+	step "Ver:"
+		try bash ../scripts/porta.sh
+	next
+	
+	esperar "sleep 2" "Atualizando..." " ${WHITE} Atualizado!"
 
-    loadMenu "menuCheck2"
-    #reload "return" "menuConfig"
+	reload "return" "menuCheck"
 	pause
 }
