@@ -16,14 +16,13 @@ banner "Menu" "Servidor" "Check1"
 	
 ipaddr=$(curl v4.ident.me)
 
-print_message "bash $thisFilePath/menus/scripts/porta.sh ${ipaddr} 20 80"
-bash $thisFilePath/menus/scripts/porta.sh ${ipaddr} 20 80
-read -n 1 -s -p "Press any key to continue 00"
+#bash $thisFilePath/menus/scripts/porta.sh ${ipaddr} 20 80
+#read -n 1 -s -p "Press any key to continue 00"
 
 	step "bash $thisFilePath/menus/scripts/porta.sh ${ipaddr} 20 80"
 		try bash $thisFilePath/menus/scripts/porta.sh ${ipaddr} 20 80
 	next
-	read -n 1 -s -p "Press any key to continue 11"
+#	read -n 1 -s -p "Press any key to continue 11"
 	esperar "sleep 2" "Atualizando..." " ${WHITE} Atualizado!"
 
 	reload "return" "menuCheck"
