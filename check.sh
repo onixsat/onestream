@@ -46,27 +46,6 @@ else
 fi
 
 
-### Logging function:
-start_terminal_logging()
-{   
-    if [ -z "$SCRIPT_LOG_FILE_ACTIVE" ]; then    
-        # Log each session to a separate file:
-        logdir=~/.terminal_logs
-        logfile=$logdir/session_log_$(date +%Y%m%d_%H%M%S)_$$.txt        
-        # If no folder exist make one:
-        if [ ! -d $logdir ]; then
-            mkdir -p $logdir
-        fi
-        export SCRIPT_LOG_FILE_ACTIVE=$logfile
-        # Start logging, a=append, q=quiet:
-        script -aq $logfile
-        exit
-    fi
-}
-### Start logging:
-start_terminal_logging
-
-
 ###############################################################################
 # Step 1: Update and Upgrade System
 ###############################################################################
