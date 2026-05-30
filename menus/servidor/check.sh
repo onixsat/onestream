@@ -14,9 +14,12 @@ addMenuItem "menuCheck" "Porta2" check2
 check1(){
 banner "Menu" "Servidor" "Check1"
 	
+ipaddr=$(curl v4.ident.me)
 
-	step "Ver:"
-		try bash ../scripts/porta.sh
+print_message "bash $thisFilePath/scripts/porta.sh ${ipaddr} 20 80"
+
+	step "bash $thisFilePath/scripts/porta.sh ${ipaddr} 20 80"
+		try bash $thisFilePath/scripts/porta.sh ${ipaddr} 20 80
 	next
 	
 	esperar "sleep 2" "Atualizando..." " ${WHITE} Atualizado!"
