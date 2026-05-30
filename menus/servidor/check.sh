@@ -17,7 +17,7 @@ banner "Menu" "Servidor" "Check1"
 ipaddr=$(curl v4.ident.me)
 
 print_message "bash $thisFilePath/menus/scripts/porta.sh ${ipaddr} 20 80"
-bash $thisFilePath/scripts/porta.sh ${ipaddr} 20 80
+bash $thisFilePath/menus/scripts/porta.sh ${ipaddr} 20 80
 read -n 1 -s -p "Press any key to continue 00"
 
 	step "bash $thisFilePath/menus/scripts/porta.sh ${ipaddr} 20 80"
