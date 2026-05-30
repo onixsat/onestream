@@ -29,7 +29,7 @@ function handle_interrupt() {
 trap handle_interrupt SIGINT
 
 display_banner() {
-    clear
+   # clear
     echo -e "${GREEN}"
     cat << "EOF" 
 
