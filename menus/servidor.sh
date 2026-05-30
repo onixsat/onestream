@@ -6,6 +6,7 @@ read -r -d '' ENV_VAR_MENU << EOM
 EOM
 createMenu "menuServidor" "$ENV_VAR_MENU"
 addMenuItem "menuServidor" "Iniciar" showInativo "Iniciar"
+addMenuItem "menuServidor" "Check" showCheck "Check"
 addMenuItem "menuServidor" "Instalar" showInstalar2 "Instalar"
 addMenuItem "menuServidor" "Load" showLoad "Load"
 addMenuItem "menuServidor" "Configuracao" loadMenu "menuConfig"
@@ -25,6 +26,15 @@ esperar "sleep 2" "Verificando..." " ${WHITE} Verificado! ${CINZA}Processos real
 reload "return" "menuServidor"
 pause
 }
+
+function showCheck(){
+banner "Servidor" "$1" "Check"
+source menus/servidor/check.sh
+esperar "sleep 2" "Verificando..." " ${WHITE} PPPPPPPPPPP"
+reload "return" "menuServidor"
+pause
+}
+
 
 function showInstalar2(){
 banner "Servidor" "$1" "Instalar"
