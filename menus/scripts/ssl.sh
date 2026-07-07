@@ -254,7 +254,7 @@ TT0mQ/r5XyA4MEAiabn7XJjvCERlF2dcn2wqJw+CreTkkQ2R
     
     printf '%s\n' "$PUBLIC_CERT" > "$BASE_DIR/${DOMAIN}_fullchain.pem"
     sleep 1
-    #esperar3 "sleep 2" "Adionando " "File public adicionado"
+    esperar3 "sleep 2" "Adionando " "File public adicionado"
 
 }
 function sslkey(){
@@ -273,7 +273,7 @@ lqapJWJqQ/GgFxY7YbBCngkqWmyhRANCAAQy7YZ3BeYgTHfi4YQrjyfxOEoC3zSk
 
     printf '%s\n' "$PRIVATE_KEY" > "$BASE_DIR/${DOMAIN}_privkey.pem"
     sleep 1
-    #esperar3 "sleep 2" "Adionando private " "File private adicionado" 
+    esperar3 "sleep 2" "Adionando private " "File private adicionado" 
 
 }
 function esperar_spinner(){
