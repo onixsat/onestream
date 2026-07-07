@@ -288,6 +288,21 @@ function proteger(){
 
   fi
 }
+function display_banner() {
+   # clear
+    echo -e "${GREEN}"
+    cat << "EOF" 
+
+  _____  _______  _____   ______  _____ 
+ |     | |______ |_____| |_____/ |     |
+ |_____| ______| |       |    \_ |_____|
+
+                    Developer: OnixSat
+
+EOF
+    echo -e "${NC}${YELLOW}* GitHub: https://github.com/onixsat${NC}\n"
+}
+
 @confirm(){
   local message="$*"
   local result=3
@@ -302,3 +317,4 @@ function proteger(){
 
   return $result
 }
+

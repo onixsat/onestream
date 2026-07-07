@@ -6,16 +6,16 @@ read -r -d '' ENV_VAR_MENU << EOM
   Menu ${BLUE}- ${BOLD}${RED}Nginx${NORMAL}
 EOM
 createMenu "menuNginx" "$ENV_VAR_MENU"
-addMenuItem "menuNginx" "Installs Default" showEditar
-addMenuItem "menuNginx" "Restart" showNovo
-addMenuItem "menuNginx" "Editor" showInativo2
-addMenuItem "menuNginx" "Logs" showSubmenu2
-addMenuItem "menuNginx" "Segurança" showSubmenu2
-addMenuItem "menuNginx" "Configuração" showSubmenu2
-addMenuItem "menuNginx" "Dominios" showSubmenu2
-addMenuItem "menuNginx" "Configurar" showSubmenu2
-addMenuItem "menuNginx" "Backups" showSubmenu2
-addMenuItem "menuNginx" "Restaurar" showSubmenu2
+addMenuItem "menuNginx" "Installs Default" showInativo2 "Instalar apps default"
+addMenuItem "menuNginx" "Restart" showInativo2 "Restart"
+addMenuItem "menuNginx" "X Editor" showEditar "Editor"
+addMenuItem "menuNginx" "Logs" showInativo2 "Logs"
+addMenuItem "menuNginx" "Segurança" showInativo2 "Segurança"
+addMenuItem "menuNginx" "Configuração" showInativo2 "Configuração"
+addMenuItem "menuNginx" "Dominios" showInativo2 "Dominios"
+addMenuItem "menuNginx" "Configurar" showInativo2 "Configurar"
+addMenuItem "menuNginx" "Backups" showInativo2 "Backups"
+addMenuItem "menuNginx" "X Restaurar" showSubmenu2
 
 GITHUB="https://raw.githubusercontent.com/onixsat/fox/refs/heads/main/editor/nginx/alterados/etc/nginx/"
 getRand(){
@@ -40,12 +40,24 @@ function cmd1(){
     fi
 }
 function showEditar(){
-	banner "Menu" "Nginx" "Editar"
+	banner "Nginx" "$1" "Editar arquivos"
 	cd $thisFilePath/editor
 	step "Ligar localhost:"
 		try cmd1
 	next	
 	esperar "sleep 2" "Atualizando..." " ${WHITE} Atualizado!"
+	reload "return" "menuNginx"
+	pause
+}
+function showSubmenu2(){
+	source "$thisFilePath/config/submenus.sh"
+	sub-menu "menuNginx"
+	reload "return" "menuNginx"
+	pause
+}
+function showInativo2(){
+	banner "Nginx" "$1" "Inátivo"
+	esperar "sleep 2" "Verificando..." " ${WHITE} Esta opção está inátiva"
 	reload "return" "menuNginx"
 	pause
 }
@@ -86,7 +98,6 @@ function showNovo(){
 	pause
 	
 }
-
 function showOriginal(){
 	banner "Menu" "Nginx" "Originais"
 	
@@ -114,20 +125,6 @@ function showOriginal(){
 	
 	esperar "sleep 2" "Atualizando..." " ${WHITE} Atualizado!"
 
-	reload "return" "menuNginx"
-	pause
-}
-
-function showSubmenu2(){
-	source "$thisFilePath/config/submenus.sh"
-	sub-menu "menuNginx"
-  reload "return" "menuNginx"
-	pause
-}
-
-function showInativo2(){
-	banner "Menu" "$1" "Inátivo"
-	esperar "sleep 2" "Verificando..." " ${WHITE} Esta opção está inátiva"
 	reload "return" "menuNginx"
 	pause
 }
