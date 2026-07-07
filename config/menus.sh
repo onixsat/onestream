@@ -2,7 +2,7 @@
 globais
 
 rlogo="$(display_banner)"
-HEADER_MSG="${rlogo}${CYAN}OS Gestor${NORMAL}"
+HEADER_MSG="${rlogo}${CYAN}Gestor${NORMAL}"
 
 read -r -d '' ENV_VAR_MENU << EOM
 ${RED}Main Menu${NORMAL}
