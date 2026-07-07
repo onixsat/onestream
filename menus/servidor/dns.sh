@@ -2,15 +2,14 @@
 globais
 
 read -r -d '' ENV_VAR_MENU << EOM
-  Menu ${BLUE}- ${BOLD}${RED}DNS${NORMAL}
+  Menu ${BLUE}Servidor - ${BOLD}${RED}DNS${NORMAL}
 EOM
 createMenu "menuDns" "$ENV_VAR_MENU"
 addMenuItem "menuDns" "Instalar" showInstalar
-addMenuItem "menuDns" "Procurar" showProcurar
+addMenuItem "menuDns" "Go back" loadMenu "menuServidor"
 
 function showInstalar(){
-	banner "DNS" "Dominios" "Instalar"
-
+	banner "Menu" "Servidor" "DNS"
   sudo apt-get update
   sudo apt-get -y install git
   sudo apt-get -y install bind-utils
