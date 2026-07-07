@@ -6,10 +6,16 @@ read -r -d '' ENV_VAR_MENU << EOM
   Menu ${BLUE}- ${BOLD}${RED}Nginx${NORMAL}
 EOM
 createMenu "menuNginx" "$ENV_VAR_MENU"
-addMenuItem "menuNginx" "Editar" showEditar
-addMenuItem "menuNginx" "Atualizar" showNovo
-addMenuItem "menuNginx" "Original" showInativo2
-addMenuItem "menuNginx" "Sub Menu" showSubmenu2
+addMenuItem "menuNginx" "Installs Default" showEditar
+addMenuItem "menuNginx" "Restart" showNovo
+addMenuItem "menuNginx" "Editor" showInativo2
+addMenuItem "menuNginx" "Logs" showSubmenu2
+addMenuItem "menuNginx" "Segurança" showSubmenu2
+addMenuItem "menuNginx" "Configuração" showSubmenu2
+addMenuItem "menuNginx" "Dominios" showSubmenu2
+addMenuItem "menuNginx" "Configurar" showSubmenu2
+addMenuItem "menuNginx" "Backups" showSubmenu2
+addMenuItem "menuNginx" "Restaurar" showSubmenu2
 
 GITHUB="https://raw.githubusercontent.com/onixsat/fox/refs/heads/main/editor/nginx/alterados/etc/nginx/"
 getRand(){
