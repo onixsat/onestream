@@ -291,16 +291,14 @@ function proteger(){
   fi
 }
 function display_banner() {
-   # clear
-    echo -e "${GREEN}"
-    cat << "EOF" 
-
+   #clear
+   #echo -e "${GREEN}"
+    cat << "EOF"
   _____  _______  _____   ______  _____ 
  |     | |______ |_____| |_____/ |     |
  |_____| ______| |       |    \_ |_____|
-
 EOF
-	echo -e "${BLUE}      Version ${version}${YELLOW} OnixSat 2026"
+	echo -e "${BLUE}            Version ${CYAN}${version}${YELLOW} OnixSat 2026"
 	echo -e "${NORMAL}"
 	echo -n "${NORMAL}"
 }
