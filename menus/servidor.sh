@@ -5,11 +5,11 @@ read -r -d '' ENV_VAR_MENU << EOM
   Menu ${BLUE}- ${BOLD}${RED}Servidor${NORMAL}
 EOM
 createMenu "menuServidor" "$ENV_VAR_MENU"
-addMenuItem "menuServidor" "Iniciar" showInativo "Iniciar"
-addMenuItem "menuServidor" "Check" loadMenu "menuCheck"
+addMenuItem "menuServidor" "Atualização" showInativo "Iniciar"
+addMenuItem "menuServidor" "Reload" loadMenu "menuCheck"
 addMenuItem "menuServidor" "Instalar" showInstalar2 "Instalar"
-addMenuItem "menuServidor" "Load" showLoad "Load"
-addMenuItem "menuServidor" "Configuracao" loadMenu "menuConfig"
+addMenuItem "menuServidor" "Configuração" showLoad "Load"
+addMenuItem "menuServidor" "Segurança" loadMenu "menuConfig"
 
 source "$thisFilePath/menus/global1.sh"
 source menus/servidor/config.sh
