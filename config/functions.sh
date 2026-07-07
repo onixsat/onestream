@@ -298,7 +298,7 @@ function display_banner() {
  |     | |______ |_____| |_____/ |     |
  |_____| ______| |       |    \_ |_____|
 EOF
-	echo -e "${BLUE}                 Version ${CYAN}${version}${YELLOW} OnixSat 2026"
+	echo -e "${BLUE}               Version ${CYAN}${version}${YELLOW} OnixSat 2026"
 	echo -e "${NORMAL}"
 	echo -n "${NORMAL}"
 }
