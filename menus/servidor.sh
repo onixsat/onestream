@@ -27,7 +27,6 @@ function showInstalar2(){
 }
 
 function showInativo(){
-	display_banner
 	banner "Servidor" "$1" "Inátivo"
 	esperar "sleep 2" "Verificando..." " ${WHITE} Esta opção está inátiva"
 	reload "return" "menuServidor"

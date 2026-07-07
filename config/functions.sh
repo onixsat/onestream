@@ -31,6 +31,7 @@ if [ -z "$var3" ]; then
 echo -n "${GREEN}                                                         "
 echo -e "${BLUE}                       Version ${version}${YELLOW} Bash OnixSat 2024"
 else
+display_banner
 echo -n ""
 echo -e "${GREEN}Menu ${var1} ${BLUE}- ${YELLOW}${var2} ${GREEN}> ${BOLD}${RED}${var3}"
 fi
