@@ -1,5 +1,8 @@
 #!/bin/bash
-HEADER_MSG="${CYAN}OS Gestor${NORMAL}"
+globais
+
+rlogo="$(display_banner)"
+HEADER_MSG="${rlogo}${CYAN}OS Gestor${NORMAL}"
 
 read -r -d '' ENV_VAR_MENU << EOM
 ${RED}Main Menu${NORMAL}

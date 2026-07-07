@@ -32,6 +32,7 @@ echo -n "${GREEN}                                                         "
 echo -e "${BLUE}                       Version ${version}${YELLOW} Bash OnixSat 2024"
 else
 display_banner
+echo -e "${BLUE}                       Version ${version}${YELLOW} Bash OnixSat 2024"
 echo -n ""
 echo -e "${GREEN}Menu ${var1} ${BLUE}- ${YELLOW}${var2} ${GREEN}> ${BOLD}${RED}${var3}"
 fi
@@ -301,7 +302,10 @@ function display_banner() {
                     Developer: OnixSat
 
 EOF
-    echo -e "${NC}${YELLOW}* GitHub: https://github.com/onixsat${NC}\n"
+    echo -e "${NC}${YELLOW}                       * GitHub: https://github.com/onixsat${NC}\n"
+	echo -e "${BLUE}                       Version ${version}${YELLOW} Bash OnixSat 2024"
+	echo -e "${NORMAL}"
+	echo -n "${NORMAL}"
 }
 
 @confirm(){
