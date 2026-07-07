@@ -1,6 +1,6 @@
 #!/bin/bash
 function globais(){
-version="1.0.0"
+version="1.0"
 WHITE="$(tput setaf 7)"
 CYAN="$(tput setaf 6)"
 MAGENTA="$(tput setaf 5)"
@@ -299,11 +299,8 @@ function display_banner() {
  |     | |______ |_____| |_____/ |     |
  |_____| ______| |       |    \_ |_____|
 
-                    Developer: OnixSat
-
 EOF
-    echo -e "${NC}${YELLOW}                       * GitHub: https://github.com/onixsat${NC}\n"
-	echo -e "${BLUE}                       Version ${version}${YELLOW} Bash OnixSat 2024"
+	echo -e "${BLUE}      Version ${version}${YELLOW} OnixSat 2026"
 	echo -e "${NORMAL}"
 	echo -n "${NORMAL}"
 }
