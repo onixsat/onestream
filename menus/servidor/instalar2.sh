@@ -1,5 +1,16 @@
-#!/bin/bash
+#!/bin/sh
+globais
 
+read -r -d '' ENV_VAR_MENU << EOM
+  Menu ${BLUE}Servidor - ${BOLD}${RED}Instalar${NORMAL}
+EOM
+createMenu "menuInstalar" "$ENV_VAR_MENU"
+addMenuItem "menuInstalar" "Instalar" showInstalar
+addMenuItem "menuInstalar" "Go back" loadMenu "menuServidor"
+
+function showInstalar(){
+	banner "Menu" "Servidor" "Instalar"
+    
 BOOTUP=color
 RES_COL=60
 MOVE_TO_COL="echo -en \\033[${RES_COL}G"
@@ -322,5 +333,13 @@ systemctl restart nginx
 
 
 
+read -n 1 -s -p "Press any key to continue 6"
+clear
 
+
+
+
+	reload "return" "menuInstalar"
+	pause
+}
 
