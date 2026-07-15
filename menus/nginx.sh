@@ -17,6 +17,12 @@ addMenuItem "menuNginx" "Configurar" showInativo2 "Configurar"
 addMenuItem "menuNginx" "Backups" showInativo2 "Backups"
 addMenuItem "menuNginx" "X Restaurar" showSubmenu2
 
+function conf(){
+sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
+sed -i 's/#server_names_hash_bucket_size/server_names_hash_bucket_size/' /etc/nginx/nginx.conf
+sudo nginx -t
+sudo systemctl reload nginx
+}
 GITHUB="https://raw.githubusercontent.com/onixsat/fox/refs/heads/main/editor/nginx/alterados/etc/nginx/"
 getRand(){
     min="${1:-1}"   ## min is the first parameter, or 1 if no parameter is given
