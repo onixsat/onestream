@@ -17,11 +17,70 @@ addMenuItem "menuNginx" "Configurar" showInativo2 "Configurar"
 addMenuItem "menuNginx" "Backups" showInativo2 "Backups"
 addMenuItem "menuNginx" "X Restaurar" showSubmenu2
 
+
+
+confirm_continue() {
+    while true; do
+        # -n prevents newline, -r prevents backslash escapes
+        read -r -p "Press Y to continue, or any other key to exit: " answer
+        
+        # Convert to lowercase for case-insensitive comparison
+        case "${answer,,}" in
+            y)
+                echo "Continuing..."
+		sleep 2
+                return 0
+                ;;
+            *)
+                echo "Exiting..."
+		sleep 2
+                exit 1
+                ;;
+        esac
+    done
+}
+
+
 function conf(){
+
+
 sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 sed -i 's/#server_names_hash_bucket_size/server_names_hash_bucket_size/' /etc/nginx/nginx.conf
 sudo nginx -t
 sudo systemctl reload nginx
+
+echo "Starting script..."
+
+sudo chown -R www-data:www-data /var/log/nginx
+sudo chmod 755 /var/log/nginx
+sudo chown -R www-data:www-data /var/log/nginx
+sudo chown -R www-data:www-data /var/log/nginx/*
+sudo chmod 755 /var/log/nginx
+sudo chmod 755 /var/log/nginx/*
+ps -o user,group,comm -C nginx
+sudo chown www-data:www-data /var/log/nginx/*.log
+sudo chmod 644 /var/log/nginx/*.log
+
+confirm_continue
+
+echo "Script continues..."
+
+if ! nginx -t >/tmp/nginx_test.log 2>&1; then
+    echo "❌ Nginx configuration test failed!"
+    cat /tmp/nginx_test.log
+    exit 1
+fi
+
+# Step 2: Reload Nginx
+if nginx -s reload 2>/tmp/nginx_reload_error.log; then
+    echo "✅ Nginx reloaded successfully."
+else
+    echo "❌ Failed to reload Nginx!"
+    cat /tmp/nginx_reload_error.log
+    exit 1
+fi
+
+
 }
 GITHUB="https://raw.githubusercontent.com/onixsat/fox/refs/heads/main/editor/nginx/alterados/etc/nginx/"
 getRand(){
