@@ -84,8 +84,8 @@ function ensure_nginx(){
 }
 function showConf1(){
 		banner "Nginx" "$1" "Conf1"
-ensure_nginx
-confirm2
+	ensure_nginx
+	confirm2
 
 sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 sed -i 's/#server_names_hash_bucket_size/server_names_hash_bucket_size/' /etc/nginx/nginx.conf
