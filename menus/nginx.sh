@@ -6,6 +6,7 @@ read -r -d '' ENV_VAR_MENU << EOM
   Menu ${BLUE}- ${BOLD}${RED}Nginx${NORMAL}
 EOM
 createMenu "menuNginx" "$ENV_VAR_MENU"
+addMenuItem "menuNginx" "Conf1" showConf1 "Instalar conf1"
 addMenuItem "menuNginx" "Installs Default" showInativo2 "Instalar apps default"
 addMenuItem "menuNginx" "Restart" showInativo2 "Restart"
 addMenuItem "menuNginx" "X Editor" showEditar "Editor"
@@ -16,6 +17,116 @@ addMenuItem "menuNginx" "Dominios" showInativo2 "Dominios"
 addMenuItem "menuNginx" "Configurar" showInativo2 "Configurar"
 addMenuItem "menuNginx" "Backups" showInativo2 "Backups"
 addMenuItem "menuNginx" "X Restaurar" showSubmenu2
+
+confirm_continue() {
+    while true; do
+        # -n prevents newline, -r prevents backslash escapes
+        read -r -p "Press Y to continue, or any other key to exit: " answer
+        
+        # Convert to lowercase for case-insensitive comparison
+        case "${answer,,}" in
+            y)
+                echo "Continuing..."
+		sleep 2
+                return 0
+                ;;
+            *)
+                echo "Exiting..."
+		sleep 2
+                exit 1
+                ;;
+        esac
+    done
+}
+confirm2() {
+    local prompt="${1:-Are you sure? (y/n, default y): }"
+    local response
+    while true; do
+        read -rp "$prompt" response
+        response=${response:-y}
+        case "$response" in
+            [Yy][Ee][Ss]|[Yy]) return 0 ;;
+            [Nn][Oo]|[Nn]) return 1 ;;
+            *) red "Invalid option. Please enter yes or no." ;;
+        esac
+    done
+}
+
+function showInstalar2(){
+	banner "Nginx" "$1" "Instalar"
+	
+	
+	if @confirm2 'Confirma que quer instalar?' ; then
+		source menus/nginx/setup_nginx.sh example.com 3000
+		source menus/nginx/setup_ssl.sh example.com your-email@example.com
+	else
+		echo "No"
+	fi
+	esperar "sleep 2" "Verificando..." " ${WHITE} PPPPPPPPPPP"
+	reload "return" "menuServidor"
+	pause
+}
+
+
+
+
+function ensure_nginx(){
+  if [ -x "$(command -v nginx)" ]; then
+      echo "Nginx already installed. Skipping installation..."
+  else
+  	confirm_continue
+      echo "Installing nginx..."
+      sudo apt update
+      sudo apt install nginx -y
+      sudo ufw app list
+      echo "Nginx installed!"
+  fi
+}
+function showConf1(){
+		banner "Nginx" "$1" "Conf1"
+ensure_nginx
+confirm2
+
+sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
+sed -i 's/#server_names_hash_bucket_size/server_names_hash_bucket_size/' /etc/nginx/nginx.conf
+sudo nginx -t
+sudo systemctl reload nginx
+
+echo "Starting script..."
+
+sudo chown -R www-data:www-data /var/log/nginx
+sudo chmod 755 /var/log/nginx
+sudo chown -R www-data:www-data /var/log/nginx
+sudo chown -R www-data:www-data /var/log/nginx/*
+sudo chmod 755 /var/log/nginx
+sudo chmod 755 /var/log/nginx/*
+ps -o user,group,comm -C nginx
+sudo chown www-data:www-data /var/log/nginx/*.log
+sudo chmod 644 /var/log/nginx/*.log
+
+confirm_continue
+
+echo "Script continues..."
+
+if ! nginx -t >/tmp/nginx_test.log 2>&1; then
+    echo "❌ Nginx configuration test failed!"
+    cat /tmp/nginx_test.log
+    exit 1
+fi
+
+# Step 2: Reload Nginx
+if nginx -s reload 2>/tmp/nginx_reload_error.log; then
+    echo "✅ Nginx reloaded successfully."
+else
+    echo "❌ Failed to reload Nginx!"
+    cat /tmp/nginx_reload_error.log
+    exit 1
+fi
+
+	esperar "sleep 2" "Verificando..." " ${WHITE} PPPPPPPPPPP"
+	reload "return" "menuNginx"
+	pause
+}
 
 GITHUB="https://raw.githubusercontent.com/onixsat/fox/refs/heads/main/editor/nginx/alterados/etc/nginx/"
 getRand(){
